@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Использование localStorage</title>
+
+	<script type="text/javascript">
+		window.onload = function(){
+
+			if(window.localStorage.bgColor){
+				document.body.style.backgroundColor = window.localStorage.bgColor;
+			}
+		
+
+			let btn1 = document.getElementById('btn1');
+			let colors = document.getElementsByName('color');
+			
+			btn1.onclick = function(){
+				for(let i=0; i<colors.length; i++){
+					if(colors[i].checked) {
+						document.body.style.backgroundColor = colors[i].value;
+						window.localStorage.setItem('bgColor', colors[i].value);
+					}
+				}	
+			}
+
+		}
+	</script>
+
+    <script>
+        window.addEventListener("load", function () {
+
+            if (window.localStorage.pageColor) {
+                document.body.style.backgroundColor = window.localStorage.pageColor;
+            }
+
+            document.getElementById("saveButton").addEventListener("click", function () {
+                var selectedColor = getCheckedRadioId("color")
+                window.localStorage.pageColor = selectedColor;
+                document.body.style.backgroundColor = selectedColor;
+            });
+
+            function getCheckedRadioId(name) {
+                var elements = document.getElementsByName(name);
+
+                for (var i = 0, len = elements.length; i < len; ++i)
+                    if (elements[i].checked) return elements[i].value;
+            }
+        });
+    </script>
+	
+</head>
+<body>
+    <form>
+        <input type="radio" name="color" value="#ffd800" /> Orange
+        <input type="radio" name="color" value="#5ade54" /> Green
+        <input id="saveButton" type="button" value="Сохранить" />
+    </form>
+</body>
+</html>
